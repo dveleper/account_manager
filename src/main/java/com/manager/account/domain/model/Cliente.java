@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 public class Cliente extends Persona {
     private String clienteId;
     private String contrasena;
-    private boolean estado;
+    private String estado;
 }
