@@ -1,4 +1,4 @@
-package com.manager.account.infrastructure.entry_points.api_rest;
+package com.manager.account.infrastructure.entry_points.health;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
