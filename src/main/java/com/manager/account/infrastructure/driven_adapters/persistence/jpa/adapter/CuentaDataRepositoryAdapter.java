@@ -7,7 +7,6 @@ import com.manager.account.infrastructure.driven_adapters.persistence.jpa.Cuenta
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.mapper.CuentaMapper;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.repository.ClienteDataRepository;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.repository.CuentaDataRepository;
-import com.manager.account.util.TipoCuenta;
 import com.manager.account.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,7 +41,9 @@ public class CuentaDataRepositoryAdapter implements CuentaRepository {
 
     @Override
     public List<Cuenta> listarTodos() {
-        return cuentaMapper.toCuentas((List<CuentaData>) cuentaDataRepository.findAll());
+        List<CuentaData> cuentaDataList = (List<CuentaData>) cuentaDataRepository.findAll();
+        if (cuentaDataList.size() == 0) throw new ResourceNotFoundException("No existen registros de Cuentas!");
+        return cuentaMapper.toCuentas(cuentaDataList);
     }
 
     @Override
@@ -54,9 +55,11 @@ public class CuentaDataRepositoryAdapter implements CuentaRepository {
 
     @Override
     public List<Cuenta> listarPorCliente(String identificacionCliente) {
-        return null;
+        clienteDataRepository.findByIdentificacion((identificacionCliente))
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Persona con documento :" + identificacionCliente + " No es cliente!"));
+        return cuentaMapper.toCuentas(cuentaDataRepository.findByClienteIdentificacion(identificacionCliente));
     }
-
 
     @Override
     public Cuenta editar(Cuenta cuenta) {

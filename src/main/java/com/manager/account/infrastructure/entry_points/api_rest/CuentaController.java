@@ -1,5 +1,6 @@
 package com.manager.account.infrastructure.entry_points.api_rest;
 
+import com.manager.account.domain.model.Cliente;
 import com.manager.account.domain.model.Cuenta;
 import com.manager.account.domain.usercase.CuentaUseCase;
 import jakarta.validation.Valid;
@@ -8,10 +9,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cuentas")
@@ -26,5 +26,29 @@ public class CuentaController {
     public ResponseEntity<Cuenta> save(@RequestBody @Valid Cuenta cuenta) {
         LOGGER.debug(String.format("creando cuenta %s", cuenta.getTipoCuenta()));
         return new ResponseEntity<>(cuentaUseCase.crear(cuenta), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/find/{identificacion}")
+    public ResponseEntity<List<Cuenta>> getByIdentification(@PathVariable String identificacion) {
+        return new ResponseEntity<>(cuentaUseCase.listarPorCliente(identificacion), HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<List<Cuenta>> getAll() {
+        return new ResponseEntity<>(cuentaUseCase.listar(), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{numero}")
+    public ResponseEntity delete (@PathVariable String numero) {
+        if(cuentaUseCase.eliminar(numero)) {
+            return new ResponseEntity<>(String.format("Cuenta %s deleted.", numero), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/update/{identificacion}")
+    public ResponseEntity<Cuenta> update (@RequestBody @Valid Cuenta cuenta) {
+        return new ResponseEntity<>(cuentaUseCase.editar(cuenta), HttpStatus.OK);
     }
 }

@@ -28,19 +28,19 @@ public class ClienteController {
     }
 
     @GetMapping("/find/{identificacion}")
-    public Cliente getByIdentification(@PathVariable String identificacion) {
-        return clienteUseCase.listarPorIdentificacion(identificacion);
+    public ResponseEntity<Cliente> getByIdentification(@PathVariable String identificacion) {
+        return new ResponseEntity<>(clienteUseCase.listarPorIdentificacion(identificacion), HttpStatus.OK);
     }
 
     @GetMapping("/find")
-    public List<Cliente> getAll() {
-        return clienteUseCase.listar();
+    public ResponseEntity<List<Cliente>> getAll() {
+        return new ResponseEntity<>(clienteUseCase.listar(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{identificacion}")
-    public ResponseEntity<Cliente> delete (@PathVariable String identificacion) {
+    public ResponseEntity delete (@PathVariable String identificacion) {
         if(clienteUseCase.eliminar(identificacion)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(String.format("Cliente %s deleted.", identificacion), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

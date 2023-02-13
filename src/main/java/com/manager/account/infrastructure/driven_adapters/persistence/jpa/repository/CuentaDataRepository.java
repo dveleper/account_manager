@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CuentaDataRepository extends CrudRepository<CuentaData, String> {
-    List<CuentaData> findByCliente(String identificacion);
+    List<CuentaData> findByClienteIdentificacion(String identificacion);
 }

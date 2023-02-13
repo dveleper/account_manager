@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ClienteDataRepositoryAdapter implements ClienteRepository {
@@ -33,7 +32,9 @@ public class ClienteDataRepositoryAdapter implements ClienteRepository {
 
     @Override
     public List<Cliente> listarTodos() {
-        return clienteMapper.toClientes((List<ClienteData>) repository.findAll());
+        List<Cliente> clientes = clienteMapper.toClientes((List<ClienteData>) repository.findAll());
+        if(clientes.size() == 0) throw new ResourceNotFoundException("No existen registros de Clientes!");
+        return clientes;
     }
 
     @Override
