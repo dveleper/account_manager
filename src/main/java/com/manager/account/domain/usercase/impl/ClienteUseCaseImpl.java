@@ -4,11 +4,11 @@ import com.manager.account.domain.model.Cliente;
 import com.manager.account.domain.model.repository.ClienteRepository;
 import com.manager.account.domain.usercase.ClienteUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @AllArgsConstructor
 public class ClienteUseCaseImpl implements ClienteUseCase {
 
@@ -20,8 +20,13 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     }
 
     @Override
-    public List<Cliente> listar(Cliente cliente) {
-        return clienteRepository.listar(cliente);
+    public List<Cliente> listar() {
+        return clienteRepository.listarTodos();
+    }
+
+    @Override
+    public Cliente listarPorIdentificacion(String identificacion) {
+        return clienteRepository.listarPorIdentificacion(identificacion);
     }
 
     @Override
@@ -30,7 +35,7 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     }
 
     @Override
-    public void eliminar(String clienteId) {
-        clienteRepository.eliminar(clienteId);
+    public boolean eliminar(String identificacion) {
+        return clienteRepository.eliminar(identificacion);
     }
 }

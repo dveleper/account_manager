@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 public class Cliente extends Persona {
-    private Integer clienteId;
     private String contrasena;
     private String estado;
 }

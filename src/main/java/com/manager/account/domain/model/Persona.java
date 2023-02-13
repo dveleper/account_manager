@@ -9,7 +9,7 @@ import lombok.*;
 public class Persona {
     private String nombre;
     private String genero;
-    private int edad;
+    private Integer edad;
     private String identificacion;
     private String direccion;
     private String telefono;

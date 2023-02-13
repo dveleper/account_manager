@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface ClienteRepository {
     Cliente crear(Cliente cliente);
-    List<Cliente> listar(Cliente cliente);
+    List<Cliente> listarTodos();
+    Cliente listarPorIdentificacion(String identificacion);
     Cliente editar(Cliente cliente);
-    void eliminar(String clienteId);
+    boolean eliminar(String clienteId);
 }
