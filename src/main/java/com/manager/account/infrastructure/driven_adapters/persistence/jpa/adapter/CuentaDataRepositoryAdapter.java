@@ -3,7 +3,6 @@ package com.manager.account.infrastructure.driven_adapters.persistence.jpa.adapt
 import com.manager.account.domain.model.Cuenta;
 import com.manager.account.domain.model.repository.CuentaRepository;
 import com.manager.account.exception.ResourceNotFoundException;
-import com.manager.account.infrastructure.driven_adapters.persistence.jpa.ClienteData;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.CuentaData;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.mapper.CuentaMapper;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.repository.ClienteDataRepository;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class CuentaDataRepositoryAdapter implements CuentaRepository {
