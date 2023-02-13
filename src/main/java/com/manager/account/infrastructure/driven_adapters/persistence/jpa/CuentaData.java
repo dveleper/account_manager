@@ -1,14 +1,15 @@
 package com.manager.account.infrastructure.driven_adapters.persistence.jpa;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigInteger;
 
 @Entity
 @Table(name = "cuenta")
+@Getter
+@Setter
 public class CuentaData {
     @Id
     @Column(name = "cuenta_id")
@@ -21,4 +22,8 @@ public class CuentaData {
     private BigInteger saldoInicial;
 
     private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", insertable = true, updatable = false)
+    private ClienteData cliente;
 }

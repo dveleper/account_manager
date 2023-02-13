@@ -3,6 +3,8 @@ package com.manager.account.infrastructure.driven_adapters.persistence.jpa.repos
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.CuentaData;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CuentaDataRepository extends CrudRepository<CuentaData, String> {
+import java.util.List;
 
+public interface CuentaDataRepository extends CrudRepository<CuentaData, String> {
+    List<CuentaData> findByCliente(String identificacion);
 }

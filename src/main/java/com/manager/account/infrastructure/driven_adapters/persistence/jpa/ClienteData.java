@@ -3,11 +3,14 @@ package com.manager.account.infrastructure.driven_adapters.persistence.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -19,4 +22,7 @@ public class ClienteData extends PersonaData {
     @Size(min = 5, message = "la contraseña debe terner al menos cinco caracteres")
     private String contrasena;
     private String estado;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<CuentaData> cuentas;
 }

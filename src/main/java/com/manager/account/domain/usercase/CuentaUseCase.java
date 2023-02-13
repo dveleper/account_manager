@@ -1,13 +1,14 @@
-package com.manager.account.domain.model.repository;
+package com.manager.account.domain.usercase;
 
+import com.manager.account.domain.model.Cliente;
 import com.manager.account.domain.model.Cuenta;
 
 import java.util.List;
 
-public interface CuentaRepository {
+public interface CuentaUseCase {
     Cuenta crear(Cuenta cuenta);
-    List<Cuenta> listarTodos();
-    Cuenta listar(String numeroCuenta);
+    List<Cuenta> listar();
+    Cuenta listarPorNumeroCuenta(String numeroCuenta);
     List<Cuenta> listarPorCliente(String identificacionCliente);
     Cuenta editar(Cuenta cuenta);
     boolean eliminar(String numeroCuenta);
