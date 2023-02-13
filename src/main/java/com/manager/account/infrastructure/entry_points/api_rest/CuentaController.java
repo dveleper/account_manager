@@ -1,6 +1,5 @@
 package com.manager.account.infrastructure.entry_points.api_rest;
 
-import com.manager.account.domain.model.Cliente;
 import com.manager.account.domain.model.Cuenta;
 import com.manager.account.domain.usercase.CuentaUseCase;
 import jakarta.validation.Valid;
@@ -28,10 +27,16 @@ public class CuentaController {
         return new ResponseEntity<>(cuentaUseCase.crear(cuenta), HttpStatus.CREATED);
     }
 
-    @GetMapping("/find/{identificacion}")
+    @GetMapping("/find/cliente/{identificacion}")
     public ResponseEntity<List<Cuenta>> getByIdentification(@PathVariable String identificacion) {
         return new ResponseEntity<>(cuentaUseCase.listarPorCliente(identificacion), HttpStatus.OK);
     }
+
+    @GetMapping("/find/{numero}")
+    public ResponseEntity<Cuenta> getByNumeroCuenta(@PathVariable String numero) {
+        return new ResponseEntity<>(cuentaUseCase.listarPorNumeroCuenta(numero), HttpStatus.OK);
+    }
+
 
     @GetMapping("/find")
     public ResponseEntity<List<Cuenta>> getAll() {
