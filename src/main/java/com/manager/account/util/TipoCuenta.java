@@ -1,13 +1,13 @@
 package com.manager.account.util;
 
-import java.util.Arrays;
-
 public enum TipoCuenta {
-    AHORROS,
-    CORRIENTE;
+    AHORROS("AHORROS"),
+    CORRIENTE("CORRIENTE");
 
-    public static boolean validate(String tipoCuenta) {
-        return Arrays.asList(TipoCuenta.values()).contains(tipoCuenta);
+    private final String nombre;
+
+    TipoCuenta(String nombre) {
+        this.nombre = nombre;
     }
 
 }

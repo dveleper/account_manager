@@ -33,13 +33,10 @@ public class CuentaDataRepositoryAdapter implements CuentaRepository {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("No se puede crear cuenta, persona con documento :" + cuenta.getCliente().getIdentificacion() + " No es cliente!"));
 
-        if (!Utils.tipoCuenta.contains(cuenta.getTipoCuenta())) {
-            throw new ResourceNotFoundException("No se puede crear cuenta, tipo de cuenta no existe!");
-        }
+        Utils.validarTipoCuenta(cuenta.getTipoCuenta());
 
         CuentaData data = cuentaMapper.toCuentaData(cuenta);
 
-        TipoCuenta.validate(cuenta.getTipoCuenta());
         return cuentaMapper.toCuenta(cuentaDataRepository.save(data));
     }
 
