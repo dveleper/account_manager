@@ -1,20 +1,19 @@
 package com.manager.account.domain.model;
 
-import com.manager.account.util.TipoMovimiento;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigInteger;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@Getter
+@Setter
 public class Movimiento {
     private Integer idMovimiento;
     private Date fecha;
-    private TipoMovimiento tipoMovimiento;
+    private String tipoMovimiento;
     private BigInteger valor;
     private BigInteger saldo;
+    private Cuenta cuenta;
 }

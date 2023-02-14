@@ -55,7 +55,7 @@ public class CuentaDataRepositoryAdapter implements CuentaRepository {
 
     @Override
     public List<Cuenta> listarPorCliente(String identificacionCliente) {
-        clienteDataRepository.findByIdentificacion((identificacionCliente))
+        clienteDataRepository.findByIdentificacion(identificacionCliente)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Persona con documento :" + identificacionCliente + " No es cliente!"));
         return cuentaMapper.toCuentas(cuentaDataRepository.findByClienteIdentificacion(identificacionCliente));

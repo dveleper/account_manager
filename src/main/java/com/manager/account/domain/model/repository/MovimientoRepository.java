@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface MovimientoRepository {
     Movimiento crear(Movimiento movimiento);
-    List<Movimiento> listar(Movimiento movimiento);
+    List<Movimiento> listar();
+    Movimiento listarPorId(Integer idMovimiento);
     Movimiento editar(Movimiento movimiento);
-    void eliminar(Integer idMovimiento);
+    boolean eliminar(Integer idMovimiento);
 }

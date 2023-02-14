@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +18,6 @@ public class Cuenta {
     private BigInteger saldoInicial;
     private String estado;
     private Cliente cliente;
+    //private List<Movimiento> movimientos;
+
 }

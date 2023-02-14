@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "cuenta")
@@ -24,6 +25,11 @@ public class CuentaData {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", insertable = true, updatable = false)
+    @JoinColumn(name = "cliente_id", updatable = false)
     private ClienteData cliente;
+
+    //@OneToMany(mappedBy = "cuenta")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MovimientoData> movimientos;
+
 }

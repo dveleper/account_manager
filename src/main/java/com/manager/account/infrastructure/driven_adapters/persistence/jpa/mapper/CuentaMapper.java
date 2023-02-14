@@ -22,6 +22,10 @@ public interface CuentaMapper {
 
     List<Cuenta> toCuentas(List<CuentaData> cuentaDataList);
 
+
+    @Mappings({
+            @Mapping(source = "numeroCuenta", target = "cuentaId")
+    })
     @InheritInverseConfiguration
     CuentaData toCuentaData(Cuenta cuenta);
 

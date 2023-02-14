@@ -1,6 +1,5 @@
 package com.manager.account.domain.usercase;
 
-import com.manager.account.domain.model.Cliente;
 import com.manager.account.domain.model.Cuenta;
 
 import java.util.List;
