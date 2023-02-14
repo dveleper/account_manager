@@ -31,7 +31,7 @@ public class MovimientoController {
         return new ResponseEntity<>(movimientoUseCase.listar(), HttpStatus.OK);
     }
 
-    @GetMapping("/find/movimientos/{numero}")
+    @GetMapping("/find/{numero}")
     public ResponseEntity<Movimiento> getByIdMovimiento(@PathVariable Integer numero) {
         return new ResponseEntity<>(movimientoUseCase.listarPorId(numero), HttpStatus.OK);
     }
@@ -43,11 +43,6 @@ public class MovimientoController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @PutMapping("/update/{numero}")
-    public ResponseEntity<Movimiento> update (@RequestBody @Valid Movimiento movimiento) {
-        return new ResponseEntity<>(movimientoUseCase.editar(movimiento), HttpStatus.OK);
     }
 
 }

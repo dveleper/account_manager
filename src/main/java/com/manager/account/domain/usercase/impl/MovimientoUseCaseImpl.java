@@ -61,10 +61,6 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
         return movimientoRepository.listarPorId(idMovimiento);
     }
 
-    @Override
-    public Movimiento editar(Movimiento movimiento) {
-        return movimientoRepository.editar(movimiento);
-    }
 
     @Override
     public boolean eliminar(Integer idMovimiento) {

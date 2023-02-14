@@ -43,12 +43,6 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
     }
 
     @Override
-    public Movimiento editar(Movimiento movimiento) {
-        MovimientoData data = movimientoMapper.toMovimientoData(movimiento);
-        return movimientoMapper.toMovimiento(movimientoDataRepository.save(data));
-    }
-
-    @Override
     public boolean eliminar(Integer idMovimiento) {
         return movimientoDataRepository.findById(idMovimiento)
                 .map(movimientoData -> {

@@ -29,7 +29,6 @@ public class CuentaData {
     private ClienteData cliente;
 
     @OneToMany(mappedBy = "cuenta")
-    //@OneToMany(cascade = CascadeType.ALL)
     private List<MovimientoData> movimientos;
 
 }
