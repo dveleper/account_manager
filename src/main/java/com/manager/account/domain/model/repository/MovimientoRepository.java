@@ -9,4 +9,5 @@ public interface MovimientoRepository {
     List<Movimiento> listar();
     Movimiento listarPorId(Integer idMovimiento);
     boolean eliminar(Integer idMovimiento);
+    List<Movimiento> consultaPoCuenta(String cuenta);
 }

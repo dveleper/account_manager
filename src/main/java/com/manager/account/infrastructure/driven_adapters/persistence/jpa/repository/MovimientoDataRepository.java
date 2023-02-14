@@ -10,4 +10,6 @@ import java.util.List;
 public interface MovimientoDataRepository extends CrudRepository<MovimientoData, Integer> {
     @Query(value = "from MovimientoData t where fecha BETWEEN :startDate AND :endDate")
     List<MovimientoData> getAllBetweenDates(OffsetDateTime endDate, OffsetDateTime startDate);
+
+    List<MovimientoData> findByCuentaCuentaId(String cuentaId);
 }

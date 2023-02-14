@@ -66,4 +66,9 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
     public boolean eliminar(Integer idMovimiento) {
         return movimientoRepository.eliminar(idMovimiento);
     }
+
+    @Override
+    public List<Movimiento> listarPorCuenta(String cuenta) {
+        return movimientoRepository.consultaPoCuenta(cuenta);
+    }
 }

@@ -50,4 +50,11 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
                     return true;
                 }).orElse(false);
     }
+
+    @Override
+    public List<Movimiento> consultaPoCuenta(String cuenta) {
+        return movimientoMapper.toMovimientos(
+                movimientoDataRepository.findByCuentaCuentaId(cuenta)
+        );
+    }
 }
