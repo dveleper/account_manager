@@ -11,6 +11,7 @@ import com.manager.account.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Component
@@ -74,5 +75,15 @@ public class CuentaDataRepositoryAdapter implements CuentaRepository {
                     cuentaDataRepository.delete(cuentaData);
                     return true;
                 }).orElse(false);
+    }
+
+    @Override
+    public void actualizarSaldo(String numeroCuenta, BigInteger nuevoSaldo) {
+        cuentaDataRepository.findById(numeroCuenta).map(cuentaData -> {
+                    cuentaData.setSaldo(nuevoSaldo);
+                    cuentaDataRepository.save(cuentaData);
+                    return cuentaData;
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta :" + numeroCuenta + " Not Found!"));
     }
 }

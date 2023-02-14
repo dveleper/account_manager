@@ -13,10 +13,7 @@ import java.util.List;
 public interface CuentaMapper {
 
     @Mappings({
-            @Mapping(source = "cuentaId", target = "numeroCuenta"),
-            @Mapping(source = "tipoCuenta", target = "tipoCuenta"),
-            @Mapping(source = "saldoInicial", target = "saldoInicial"),
-            @Mapping(source = "cliente", target = "cliente")
+            @Mapping(source = "cuentaId", target = "numeroCuenta")
     })
     Cuenta toCuenta(CuentaData cuenta);
 

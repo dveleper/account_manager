@@ -19,8 +19,8 @@ public class CuentaData {
     @Column(name = "tipo_cuenta")
     private String tipoCuenta;
 
-    @Column(name = "saldo_inicial")
-    private BigInteger saldoInicial;
+    @Column(name = "saldo")
+    private BigInteger saldo;
 
     private String estado;
 
@@ -28,8 +28,8 @@ public class CuentaData {
     @JoinColumn(name = "cliente_id", updatable = false)
     private ClienteData cliente;
 
-    //@OneToMany(mappedBy = "cuenta")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cuenta")
+    //@OneToMany(cascade = CascadeType.ALL)
     private List<MovimientoData> movimientos;
 
 }

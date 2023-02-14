@@ -27,6 +27,6 @@ public class MovimientoData {
     private BigInteger saldo;
 
     @ManyToOne
-    @JoinColumn(name = "cuenta_id", updatable = false)
+    @JoinColumn(name = "cuenta_id")
     private CuentaData cuenta;
 }

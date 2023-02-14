@@ -2,6 +2,7 @@ package com.manager.account.domain.model.repository;
 
 import com.manager.account.domain.model.Cuenta;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface CuentaRepository {
@@ -11,4 +12,5 @@ public interface CuentaRepository {
     List<Cuenta> listarPorCliente(String identificacionCliente);
     Cuenta editar(Cuenta cuenta);
     boolean eliminar(String numeroCuenta);
+    void actualizarSaldo(String numeroCuenta, BigInteger nuevoSaldo);
 }
