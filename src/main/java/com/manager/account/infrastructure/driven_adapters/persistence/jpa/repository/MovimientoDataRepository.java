@@ -11,5 +11,5 @@ public interface MovimientoDataRepository extends CrudRepository<MovimientoData,
     @Query(value = "from MovimientoData t where fecha BETWEEN :startDate AND :endDate")
     List<MovimientoData> getAllBetweenDates(OffsetDateTime endDate, OffsetDateTime startDate);
 
-    List<MovimientoData> findByCuentaCuentaId(String cuentaId);
+    List<MovimientoData> findByCuentaNumero(String cuentaId);
 }

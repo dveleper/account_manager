@@ -12,17 +12,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CuentaMapper {
 
-    @Mappings({
-            @Mapping(source = "cuentaId", target = "numeroCuenta")
-    })
     Cuenta toCuenta(CuentaData cuenta);
 
     List<Cuenta> toCuentas(List<CuentaData> cuentaDataList);
 
 
-    @Mappings({
-            @Mapping(source = "numeroCuenta", target = "cuentaId")
-    })
     @InheritInverseConfiguration
     CuentaData toCuentaData(Cuenta cuenta);
 

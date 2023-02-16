@@ -12,7 +12,7 @@ import java.math.BigInteger;
 @Getter
 @Setter
 public class Cuenta {
-    private String numeroCuenta;
+    private String numero;
     private String tipoCuenta;
     private BigInteger saldo;
     private String estado;

@@ -12,9 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
 
-    @Mappings({
-            @Mapping(source = "estado", target = "estado")
-    })
     Cliente toCliente(ClienteData clienteData);
 
     List<Cliente> toClientes(List<ClienteData> clienteDataList);

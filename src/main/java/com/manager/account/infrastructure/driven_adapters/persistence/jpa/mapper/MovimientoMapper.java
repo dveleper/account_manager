@@ -20,9 +20,6 @@ public interface MovimientoMapper {
     List<Movimiento> toMovimientos(List<MovimientoData> movimientos);
 
     @InheritInverseConfiguration
-    @Mappings({
-            @Mapping(source = "cuenta.numeroCuenta", target = "cuenta.cuentaId")
-    })
     MovimientoData toMovimientoData(Movimiento movimiento);
 
 }

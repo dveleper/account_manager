@@ -25,14 +25,14 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
         movimiento.setFecha(new Date());
         afectarSaldo(movimiento);
         Movimiento transaccion = movimientoRepository.crear(movimiento);
-        transaccion.getCuenta().setNumeroCuenta(movimiento.getCuenta().getNumeroCuenta());
-        cuentaRepository.actualizarSaldo(movimiento.getCuenta().getNumeroCuenta(), movimiento.getSaldo());
+        transaccion.getCuenta().setNumero(movimiento.getCuenta().getNumero());
+        cuentaRepository.actualizarSaldo(movimiento.getCuenta().getNumero(), movimiento.getSaldo());
         return transaccion;
     }
 
 
     private void afectarSaldo(Movimiento movimiento) {
-        Cuenta cuenta = cuentaRepository.listar(movimiento.getCuenta().getNumeroCuenta());
+        Cuenta cuenta = cuentaRepository.listar(movimiento.getCuenta().getNumero());
         BigInteger nuevoSaldo;
         switch (movimiento.getTipoMovimiento()) {
             case Utils.DEBITO -> {

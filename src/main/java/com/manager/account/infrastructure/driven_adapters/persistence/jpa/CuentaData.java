@@ -13,8 +13,7 @@ import java.util.List;
 @Setter
 public class CuentaData {
     @Id
-    @Column(name = "cuenta_id")
-    private String cuentaId;
+    private String numero;
 
     @Column(name = "tipo_cuenta")
     private String tipoCuenta;
