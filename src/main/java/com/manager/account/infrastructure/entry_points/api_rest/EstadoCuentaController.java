@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,10 +24,15 @@ public class EstadoCuentaController {
     private final Log LOGGER = LogFactory.getLog(EstadoCuentaController.class);
 
     @PostMapping("/{fecha_inicial}/{fecha_final}")
-    public ResponseEntity<List<EstadoCuenta>> getEstadoCuenta(@PathVariable String fecha_inicial, @PathVariable String fecha_final, @RequestBody EstadoCuentaInput input) {
+    public ResponseEntity<List<EstadoCuenta>> getEstadoCuenta(@PathVariable String fecha_inicial, @PathVariable String fecha_final, @RequestBody EstadoCuentaInput input) throws ParseException {
         LOGGER.debug("generando reporte ... ");
-        input.setFecha_inicial(fecha_inicial);
-        input.setFecha_final(fecha_final);
+        input.setFechaInicial(getDateFormat(fecha_inicial));
+        input.setFechaFinal(getDateFormat(fecha_final));
         return new ResponseEntity<>(estadoCuentaUseCase.obtenerReporte(input), HttpStatus.OK);
+    }
+
+    private Date getDateFormat(String fecha) throws ParseException {
+        SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+        return formato.parse(fecha);
     }
 }

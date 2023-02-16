@@ -17,6 +17,7 @@ public class MovimientoData {
     @Column(name = "movimiento_id")
     private Integer movimientoId;
 
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
     @Column(name = "tipo_movimiento")
@@ -26,7 +27,7 @@ public class MovimientoData {
 
     private BigInteger saldo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cuenta_id")
     private CuentaData cuenta;
 }
