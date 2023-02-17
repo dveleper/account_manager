@@ -6,10 +6,12 @@ import com.manager.account.exception.ResourceNotFoundException;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.MovimientoData;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.mapper.MovimientoMapper;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.repository.MovimientoDataRepository;
+import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Component
 public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
@@ -28,9 +30,9 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
 
     @Override
     public List<Movimiento> listar() {
-        List<MovimientoData> movimientos = (List<MovimientoData>) movimientoDataRepository.findAll();
-        if (movimientos.size() == 0) throw new ResourceNotFoundException("No existen registros de Movimientos!");
-        return movimientoMapper.toMovimientos(movimientos);
+        Iterable<MovimientoData> movimientos = movimientoDataRepository.findAll();
+        if (!movimientos.iterator().hasNext()) throw new ResourceNotFoundException("No existen registros de Movimientos!");
+        return movimientoMapper.toMovimientos(StreamSupport.stream(movimientos.spliterator(), false).toList());
     }
 
     @Override
