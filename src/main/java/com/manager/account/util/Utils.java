@@ -2,6 +2,8 @@ package com.manager.account.util;
 
 import com.manager.account.exception.ResourceNotFoundException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Utils {
@@ -17,5 +19,9 @@ public class Utils {
     }
 
 
+    public static Date getDateFormat(String fecha) throws ParseException {
+        SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+        return formato.parse(fecha);
+    }
 
 }
