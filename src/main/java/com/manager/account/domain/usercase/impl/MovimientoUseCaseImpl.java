@@ -9,6 +9,7 @@ import com.manager.account.exception.ResourceNotFoundException;
 import com.manager.account.util.Utils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
 
 
     @Override
+    @Transactional
     public Movimiento crear(Movimiento movimiento) {
         movimiento.setFecha(new Date());
         Cuenta cuenta = cuentaUseCase.listarPorNumeroCuenta(movimiento.getCuenta().getNumero());
@@ -46,22 +48,26 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<Movimiento> listar() {
         return movimientoRepository.listar();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Movimiento listarPorId(Integer idMovimiento) {
         return movimientoRepository.listarPorId(idMovimiento);
     }
 
 
     @Override
+    @Transactional
     public boolean eliminar(Integer idMovimiento) {
         return movimientoRepository.eliminar(idMovimiento);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Movimiento> listarPorCuenta(String cuenta) {
         return movimientoRepository.consultaPoCuenta(cuenta);
     }
