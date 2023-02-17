@@ -2,8 +2,8 @@ package com.manager.account.domain.usercase.impl;
 
 import com.manager.account.domain.model.Cuenta;
 import com.manager.account.domain.model.Movimiento;
-import com.manager.account.domain.model.repository.CuentaRepository;
 import com.manager.account.domain.model.repository.MovimientoRepository;
+import com.manager.account.domain.usercase.CuentaUseCase;
 import com.manager.account.domain.usercase.MovimientoUseCase;
 import com.manager.account.exception.ResourceNotFoundException;
 import com.manager.account.util.Utils;
@@ -18,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class MovimientoUseCaseImpl implements MovimientoUseCase {
     private final MovimientoRepository movimientoRepository;
-    private final CuentaRepository cuentaRepository;
+    private final CuentaUseCase cuentaUseCase;
+
 
     @Override
     public Movimiento crear(Movimiento movimiento) {
@@ -26,22 +27,17 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
         afectarSaldo(movimiento);
         Movimiento transaccion = movimientoRepository.crear(movimiento);
         transaccion.getCuenta().setNumero(movimiento.getCuenta().getNumero());
-        cuentaRepository.actualizarSaldo(movimiento.getCuenta().getNumero(), movimiento.getSaldo());
+        cuentaUseCase.actualizarSaldo(movimiento.getCuenta().getNumero(), movimiento.getSaldo());
         return transaccion;
     }
 
 
     private void afectarSaldo(Movimiento movimiento) {
-        Cuenta cuenta = cuentaRepository.listar(movimiento.getCuenta().getNumero());
+        Cuenta cuenta = cuentaUseCase.listarPorNumeroCuenta(movimiento.getCuenta().getNumero());
         BigInteger nuevoSaldo;
         switch (movimiento.getTipoMovimiento()) {
-            case Utils.DEBITO -> {
-                if (cuenta.getSaldo().intValue() == 0) {
-                    throw new ResourceNotFoundException("Saldo no disponible");
-                }
-                nuevoSaldo = cuenta.getSaldo().min(movimiento.getValor());
-            }
-            case Utils.CREDITO -> nuevoSaldo = cuenta.getSaldo().add(movimiento.getValor());
+            case Utils.DEBITO -> nuevoSaldo = cuentaUseCase.realizarDebito(cuenta.getSaldo(), movimiento.getValor());
+            case Utils.CREDITO -> nuevoSaldo = cuentaUseCase.realizarCredito(cuenta.getSaldo(), movimiento.getValor());
             default -> throw new ResourceNotFoundException(String.format("tipo de movimiento: %s no disponible", movimiento.getTipoMovimiento()));
         }
         cuenta.setSaldo(nuevoSaldo);

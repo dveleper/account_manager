@@ -23,7 +23,6 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
     @Override
     public Movimiento crear(Movimiento movimiento) {
         MovimientoData data = movimientoMapper.toMovimientoData(movimiento);
-        data.getCuenta().setNumero(movimiento.getCuenta().getNumero());
         return movimientoMapper.toMovimiento(movimientoDataRepository.save(data));
     }
 
