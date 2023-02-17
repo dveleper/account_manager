@@ -24,25 +24,23 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
     @Override
     public Movimiento crear(Movimiento movimiento) {
         movimiento.setFecha(new Date());
-        afectarSaldo(movimiento);
-        Movimiento transaccion = movimientoRepository.crear(movimiento);
-        transaccion.getCuenta().setNumero(movimiento.getCuenta().getNumero());
-        cuentaUseCase.actualizarSaldo(movimiento.getCuenta().getNumero(), movimiento.getSaldo());
-        return transaccion;
+        Cuenta cuenta = cuentaUseCase.listarPorNumeroCuenta(movimiento.getCuenta().getNumero());
+        afectarSaldo(movimiento, cuenta);
+        return movimientoRepository.crear(movimiento);
     }
 
 
-    private void afectarSaldo(Movimiento movimiento) {
-        Cuenta cuenta = cuentaUseCase.listarPorNumeroCuenta(movimiento.getCuenta().getNumero());
+    private void afectarSaldo(Movimiento movimiento, Cuenta cuenta) {
+        movimiento.setSaldo(cuenta.getSaldo());
         BigInteger nuevoSaldo;
         switch (movimiento.getTipoMovimiento()) {
             case Utils.DEBITO -> nuevoSaldo = cuentaUseCase.realizarDebito(cuenta.getSaldo(), movimiento.getValor());
             case Utils.CREDITO -> nuevoSaldo = cuentaUseCase.realizarCredito(cuenta.getSaldo(), movimiento.getValor());
             default -> throw new ResourceNotFoundException(String.format("tipo de movimiento: %s no disponible", movimiento.getTipoMovimiento()));
         }
+        cuentaUseCase.actualizarSaldo(movimiento.getCuenta().getNumero(), nuevoSaldo);
         cuenta.setSaldo(nuevoSaldo);
         movimiento.setCuenta(cuenta);
-        movimiento.setSaldo(nuevoSaldo);
     }
 
 
