@@ -5,6 +5,7 @@ import com.manager.account.exception.ResourceNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 public class Utils {
 
@@ -18,10 +19,14 @@ public class Utils {
         throw new ResourceNotFoundException("No se puede crear cuenta, tipo de cuenta : " + tipoCuenta + " no existe!");
     }
 
-
     public static Date getDateFormat(String fecha) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
         return formato.parse(fecha);
+    }
+
+    public static <T> List<T> toList(final Iterable<T> iterable) {
+        return StreamSupport.stream(iterable.spliterator(), false)
+                .toList();
     }
 
 }
