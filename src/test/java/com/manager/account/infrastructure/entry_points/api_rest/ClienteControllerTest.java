@@ -93,6 +93,17 @@ class ClienteControllerTest {
     }
 
     @Test
+    void deleteException() throws Exception {
+        when(clienteUseCase.eliminar(anyString())).thenReturn(false);
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/clientes/delete/123")
+                        .param("identificacion", "123")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+        verify(clienteUseCase).eliminar("123");
+    }
+
+    @Test
     void update() throws Exception {
         Cliente client = new Cliente();
         client.setNombre("felix of the cat");
