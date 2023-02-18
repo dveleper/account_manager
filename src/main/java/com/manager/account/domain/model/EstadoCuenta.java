@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.math.BigInteger;
 import java.util.Date;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
