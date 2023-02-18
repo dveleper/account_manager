@@ -2,6 +2,7 @@ package com.manager.account.domain.usercase;
 
 import com.manager.account.domain.model.Cuenta;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface CuentaUseCase {
@@ -11,4 +12,7 @@ public interface CuentaUseCase {
     List<Cuenta> listarPorCliente(String identificacionCliente);
     Cuenta editar(Cuenta cuenta);
     boolean eliminar(String numeroCuenta);
+    void actualizarSaldo(String numeroCuenta, BigInteger nuevoSaldo);
+    BigInteger realizarDebito(BigInteger saldoActual, BigInteger monto);
+    BigInteger realizarCredito(BigInteger saldoActual, BigInteger monto);
 }

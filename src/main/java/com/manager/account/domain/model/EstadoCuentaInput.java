@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+import java.util.Date;
+
 @NoArgsConstructor
 @Getter
 @Setter
 public class EstadoCuentaInput {
     private String identificacion;
-    private String fecha_inicial;
-    private String fecha_final;
+    private Date fechaInicial;
+    private Date fechaFinal;
 }

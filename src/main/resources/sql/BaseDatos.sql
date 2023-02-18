@@ -34,6 +34,15 @@ CREATE TABLE `cliente` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuenta`
 --
 
@@ -41,16 +50,25 @@ DROP TABLE IF EXISTS `cuenta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cuenta` (
-  `cuenta_id` varchar(20) NOT NULL,
+  `numero` varchar(20) NOT NULL,
   `tipo_cuenta` varchar(10) NOT NULL,
   `saldo` bigint NOT NULL DEFAULT '0',
   `estado` varchar(5) NOT NULL DEFAULT 'true',
   `cliente_id` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`cuenta_id`),
+  PRIMARY KEY (`numero`),
   KEY `cliiente_id_fk_idx` (`cliente_id`),
   CONSTRAINT `cliiente_id_fk` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`identificacion`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuenta`
+--
+
+LOCK TABLES `cuenta` WRITE;
+/*!40000 ALTER TABLE `cuenta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuenta` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `movimiento`
@@ -68,9 +86,18 @@ CREATE TABLE `movimiento` (
   `cuenta_id` varchar(20) NOT NULL,
   PRIMARY KEY (`movimiento_id`),
   KEY `cuenta_fk_idx` (`cuenta_id`),
-  CONSTRAINT `cuenta_fk` FOREIGN KEY (`cuenta_id`) REFERENCES `cuenta` (`cuenta_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `cuenta_fk` FOREIGN KEY (`cuenta_id`) REFERENCES `cuenta` (`numero`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movimiento`
+--
+
+LOCK TABLES `movimiento` WRITE;
+/*!40000 ALTER TABLE `movimiento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `movimiento` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `persona`
@@ -89,6 +116,15 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`identificacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `persona`
+--
+
+LOCK TABLES `persona` WRITE;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -99,4 +135,4 @@ CREATE TABLE `persona` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-14  8:50:29
+-- Dump completed on 2023-02-16 20:13:00

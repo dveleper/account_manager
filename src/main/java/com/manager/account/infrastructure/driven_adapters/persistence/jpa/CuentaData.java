@@ -13,8 +13,7 @@ import java.util.List;
 @Setter
 public class CuentaData {
     @Id
-    @Column(name = "cuenta_id")
-    private String cuentaId;
+    private String numero;
 
     @Column(name = "tipo_cuenta")
     private String tipoCuenta;
@@ -28,7 +27,7 @@ public class CuentaData {
     @JoinColumn(name = "cliente_id", updatable = false)
     private ClienteData cliente;
 
-    @OneToMany(mappedBy = "cuenta")
+    @OneToMany(mappedBy = "cuenta", cascade = CascadeType.REMOVE)
     private List<MovimientoData> movimientos;
 
 }

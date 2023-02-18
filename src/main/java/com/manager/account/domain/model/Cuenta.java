@@ -1,18 +1,14 @@
 package com.manager.account.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigInteger;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Cuenta {
-    private String numeroCuenta;
+    private String numero;
     private String tipoCuenta;
     private BigInteger saldo;
     private String estado;

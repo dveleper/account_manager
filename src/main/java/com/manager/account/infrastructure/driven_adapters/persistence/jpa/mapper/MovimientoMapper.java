@@ -12,17 +12,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MovimientoMapper {
     @Mappings({
-            @Mapping(source = "movimientoId", target = "idMovimiento"),
-            @Mapping(source = "tipoMovimiento", target = "tipoMovimiento")
+            @Mapping(source = "movimientoId", target = "idMovimiento")
     })
     Movimiento toMovimiento(MovimientoData movimiento);
 
     List<Movimiento> toMovimientos(List<MovimientoData> movimientos);
 
     @InheritInverseConfiguration
-    @Mappings({
-            @Mapping(source = "cuenta.numeroCuenta", target = "cuenta.cuentaId")
-    })
     MovimientoData toMovimientoData(Movimiento movimiento);
 
 }

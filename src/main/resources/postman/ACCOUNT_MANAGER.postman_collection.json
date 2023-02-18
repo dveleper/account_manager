@@ -37,7 +37,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"numeroCuenta\": \"00000024560\",\r\n    \"tipoCuenta\": \"CORRIENTE\",\r\n    \"saldo\": 0,\r\n    \"estado\": \"true\",\r\n    \"cliente\": {\r\n        \"identificacion\": \"14396183\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"numero\": \"00000024561\",\r\n    \"tipoCuenta\": \"AHORROS\",\r\n    \"saldo\": 0,\r\n    \"estado\": \"true\",\r\n    \"cliente\": {\r\n        \"identificacion\": \"14396183\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"numeroCuenta\": \"00000024560\",\r\n    \"tipoCuenta\": \"CORRIENTE\",\r\n    \"saldo\": 0,\r\n    \"estado\": \"false\",\r\n    \"cliente\": {\r\n        \"identificacion\": \"14396183\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"numero\": \"00000024560\",\r\n    \"tipoCuenta\": \"CORRIENTE\",\r\n    \"saldo\": 0,\r\n    \"estado\": \"false\",\r\n    \"cliente\": {\r\n        \"identificacion\": \"14396183\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +273,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/app/clientes/find/143961835",
+							"raw": "http://localhost:8081/app/clientes/find/14396183",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -283,7 +283,7 @@
 								"app",
 								"clientes",
 								"find",
-								"143961835"
+								"14396183"
 							]
 						}
 					},
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tipoMovimiento\": \"CREDITO\",\r\n    \"valor\": 15000,\r\n    \"cuenta\": {\r\n        \"numeroCuenta\": \"00000024560\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"tipoMovimiento\": \"CREDITO\",\r\n    \"valor\": 100000,\r\n    \"cuenta\": {\r\n        \"numero\": \"00000024560\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -326,21 +326,9 @@
 				},
 				{
 					"name": "Listar movimientos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"tipoMovimiento\": \"CREDITO\",\r\n    \"valor\": 200000,\r\n    \"cuenta\": {\r\n        \"numeroCuenta\": \"00000024560\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:8081/app/movimientos/find",
 							"protocol": "http",
@@ -367,7 +355,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tipoMovimiento\": \"CREDITO\",\r\n    \"valor\": 200000,\r\n    \"cuenta\": {\r\n        \"numeroCuenta\": \"00000024560\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"tipoMovimiento\": \"CREDITO\",\r\n    \"valor\": 200000,\r\n    \"cuenta\": {\r\n        \"numero\": \"00000024560\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -386,6 +374,29 @@
 								"movimientos",
 								"find",
 								"46"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/app/movimientos/find/cuenta/00000024561",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"app",
+								"movimientos",
+								"find",
+								"cuenta",
+								"00000024561"
 							]
 						}
 					},
@@ -425,15 +436,24 @@
 			]
 		},
 		{
-			"name": "REPORTE",
+			"name": "Reporte",
 			"item": [
 				{
 					"name": "Estado de cuenta",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": 14396183\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8081/app/reportes/14022023/14022023",
+							"raw": "http://localhost:8081/app/reportes/16022023/16022023",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -442,8 +462,8 @@
 							"path": [
 								"app",
 								"reportes",
-								"14022023",
-								"14022023"
+								"16022023",
+								"16022023"
 							]
 						}
 					},

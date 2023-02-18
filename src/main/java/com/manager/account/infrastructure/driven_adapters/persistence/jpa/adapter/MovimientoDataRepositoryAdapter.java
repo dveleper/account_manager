@@ -6,6 +6,7 @@ import com.manager.account.exception.ResourceNotFoundException;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.MovimientoData;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.mapper.MovimientoMapper;
 import com.manager.account.infrastructure.driven_adapters.persistence.jpa.repository.MovimientoDataRepository;
+import com.manager.account.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,15 +24,14 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
     @Override
     public Movimiento crear(Movimiento movimiento) {
         MovimientoData data = movimientoMapper.toMovimientoData(movimiento);
-        data.getCuenta().setCuentaId(movimiento.getCuenta().getNumeroCuenta());
         return movimientoMapper.toMovimiento(movimientoDataRepository.save(data));
     }
 
     @Override
     public List<Movimiento> listar() {
-        List<MovimientoData> movimientos = (List<MovimientoData>) movimientoDataRepository.findAll();
-        if (movimientos.size() == 0) throw new ResourceNotFoundException("No existen registros de Movimientos!");
-        return movimientoMapper.toMovimientos(movimientos);
+        Iterable<MovimientoData> movimientos = movimientoDataRepository.findAll();
+        if (!movimientos.iterator().hasNext()) throw new ResourceNotFoundException("No existen registros de Movimientos!");
+        return movimientoMapper.toMovimientos(Utils.toList(movimientos));
     }
 
     @Override
@@ -49,5 +49,12 @@ public class MovimientoDataRepositoryAdapter implements MovimientoRepository {
                     movimientoDataRepository.delete(movimientoData);
                     return true;
                 }).orElse(false);
+    }
+
+    @Override
+    public List<Movimiento> consultaPoCuenta(String cuenta) {
+        return movimientoMapper.toMovimientos(
+                movimientoDataRepository.findByCuentaNumero(cuenta)
+        );
     }
 }

@@ -36,6 +36,11 @@ public class MovimientoController {
         return new ResponseEntity<>(movimientoUseCase.listarPorId(numero), HttpStatus.OK);
     }
 
+    @GetMapping("/find/cuenta/{cuenta}")
+    public ResponseEntity<List<Movimiento>> getByIdIdentification(@PathVariable String cuenta) {
+        return new ResponseEntity<>(movimientoUseCase.listarPorCuenta(cuenta), HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{numero}")
     public ResponseEntity delete(@PathVariable Integer numero) {
         if (movimientoUseCase.eliminar(numero)) {

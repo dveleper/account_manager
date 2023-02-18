@@ -2,7 +2,6 @@ package com.manager.account.domain.model;
 
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter

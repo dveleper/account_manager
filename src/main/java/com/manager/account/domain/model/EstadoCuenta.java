@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.Date;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class EstadoCuenta {
-    private String fecha;
+    private Date fecha;
     private String cliente;
     private String numeroCuenta;
     private String tipo;

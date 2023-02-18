@@ -9,5 +9,6 @@ public interface MovimientoUseCase {
     List<Movimiento> listar();
     Movimiento listarPorId(Integer idMovimiento);
     boolean eliminar(Integer idMovimiento);
+    List<Movimiento> listarPorCuenta(String cuenta);
 
 }
