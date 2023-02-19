@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mysql_db:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: account_manager
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: sa
+      MYSQL_ROOT_PASSWORD: root
+
+  api_service:
+    build: .
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/account_manager?autoReconnect=true&useSSL=false
+    depends_on:
+      - mysql_db

@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
-COPY "./target/account-0.0.1.jar" "app.jar"
-EXPOSE 8082
+FROM openjdk:17-jdk-alpine
+COPY "./target/account-1.0.jar" "app.jar"
+EXPOSE 8081
 ENTRYPOINT ["java","-jar","app.jar"]
