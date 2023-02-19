@@ -1,11 +1,14 @@
 CREATE DATABASE  IF NOT EXISTS account_manager;
 USE account_manager;
 
+DROP TABLE IF EXISTS movimiento;
+DROP TABLE IF EXISTS cuenta;
+DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS persona;
 --
 -- Table structure for table persona
 --
 
-DROP TABLE IF EXISTS persona;
 CREATE TABLE persona (
   identificacion varchar(20) NOT NULL,
   nombre varchar(45) NOT NULL,
@@ -20,7 +23,7 @@ CREATE TABLE persona (
 -- Table structure for table cliente
 --
 
-DROP TABLE IF EXISTS cliente;
+
 CREATE TABLE cliente (
   contrasena varchar(10) NOT NULL,
   estado varchar(10) NOT NULL,
@@ -33,7 +36,7 @@ CREATE TABLE cliente (
 -- Table structure for table cuenta
 --
 
-DROP TABLE IF EXISTS cuenta;
+
 CREATE TABLE cuenta (
   numero varchar(20) NOT NULL,
   tipo_cuenta varchar(10) NOT NULL,
@@ -49,7 +52,7 @@ CREATE TABLE cuenta (
 -- Table structure for table movimiento
 --
 
-DROP TABLE IF EXISTS movimiento;
+
 CREATE TABLE movimiento (
   movimiento_id int NOT NULL AUTO_INCREMENT,
   fecha date NOT NULL,
