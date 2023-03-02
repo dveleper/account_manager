@@ -17,6 +17,6 @@ services:
     ports:
       - 8081:8081
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/account_manager?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/account_manager?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false
     depends_on:
       - mysql_db
